@@ -10,9 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Sidebar } from "./Sidebar";
 import { Drawer } from "@material-ui/core";
-
+import { Sidebar } from "./Sidebar";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

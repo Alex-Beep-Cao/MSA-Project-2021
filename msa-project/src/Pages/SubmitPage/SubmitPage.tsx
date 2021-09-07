@@ -1,6 +1,6 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import { SubmitForm } from "../../SubmitForm";
+import { SubmitForm } from "../../stories/SubmitForm";
 
 export const SubmitPage = () => {
   return (

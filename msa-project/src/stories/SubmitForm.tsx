@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { TextField, Typography, Grid, Container } from "@material-ui/core";
 import { makeStyles, Theme } from "@material-ui/core/styles";
-import { Button } from "./stories/Button";
+import { Button } from "./Button";
+import { gql, useMutation } from "@apollo/client";
+//import { AddPost } from "./api/AddPost";
 //import "./submit-form.css";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -15,7 +17,7 @@ export interface SubmitFormProps {}
 
 export const SubmitForm: React.FC<SubmitFormProps> = () => {
   const classes = useStyles();
-  const [postName, setPostName] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [githubUrl, setGithubUrl] = useState<string>("");
   const [content, setContent] = useState("");
   const [submit, setSubmit] = useState(false);
@@ -27,17 +29,31 @@ export const SubmitForm: React.FC<SubmitFormProps> = () => {
     return urlRegex.test(value);
   };
 
-  const handleSubmit = async () => {
-    if (postName !== "" && isGithubUrl(githubUrl)) {
-      console.log({
-        projectName: postName,
-        githubUrl: githubUrl,
-        Description: content,
-      });
-    } else {
-      setHasFocus(true);
-    }
-  };
+  // const [addPost] = useMutation<AddPost>(ADD_POST);
+  // const handleSubmit = async () => {
+  //   if (title !== "" && isGithubUrl(githubUrl)) {
+  //     console.log({
+  //       Title: title,
+  //       githubUrl: githubUrl,
+  //       Content: content,
+  //     });
+
+  //     try {
+  //       await addPost({
+  //         variables: {
+  //           Title: title,
+  //           githubUrl: githubUrl,
+  //           Content: content,
+  //         },
+  //       });
+  //       setSubmit(true);
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   } else {
+  //     setHasFocus(true);
+  //   }
+  // };
   return (
     <Container className="form_container">
       <Typography variant="h4">Submit your post here!</Typography>
@@ -50,11 +66,11 @@ export const SubmitForm: React.FC<SubmitFormProps> = () => {
             id="standard-basic"
             label="Post Name"
             fullWidth
-            error={hasFocus && postName === ""}
-            value={postName}
-            className={hasFocus && postName === "" ? "" : classes.root}
+            error={hasFocus && title === ""}
+            value={title}
+            className={hasFocus && title === "" ? "" : classes.root}
             helperText="Invalid Post Name"
-            onChange={(e) => setPostName(e.target.value)}
+            onChange={(e) => setTitle(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -91,7 +107,7 @@ export const SubmitForm: React.FC<SubmitFormProps> = () => {
         // className="form_button"
         backgroundColor="limegreen"
         label="Submit"
-        onClick={handleSubmit}
+        // onClick={handleSubmit}
         primary
         size="medium"
       />

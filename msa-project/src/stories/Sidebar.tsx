@@ -12,7 +12,10 @@ import {
 import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import { SubmitForm } from "../SubmitForm";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+
+const CLIENT_ID = "db91b85f047825b818b2";
+const REDIRECT_URI = "http://localhost:3000/home";
 
 const useStyles = makeStyles({
   list: {
@@ -28,11 +31,16 @@ const useStyles = makeStyles({
 
 export const Sidebar = () => {
   const classes = useStyles();
-  //   const [submitForm, setsubmitForm] = useState(false);
+  const [submitForm, setsubmitForm] = useState(false);
 
   //   const togglesubmitForm = () => {
   //     setsubmitForm(!submitForm);
   //   };
+  // export const SideBar: React.FC<HeaderProps> = ({ user }) => {
+  //   const classes = useStyles();
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
 
   return (
     <div className={classes.list}>
@@ -52,7 +60,18 @@ export const Sidebar = () => {
       </List>
       <Divider />
       <List>
-        <ListItem button href="/login" component={Link}>
+        <ListItem button href="/home" component={Link} onClick={handleLogout}>
+          <ListItemIcon>
+            <ExitToAppIcon />
+          </ListItemIcon>
+          <ListItemText className={classes.listText} primary="Logout" />
+        </ListItem>
+
+        <ListItem
+          button
+          href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
+          component={Link}
+        >
           <ListItemIcon>
             <AddBoxIcon />
           </ListItemIcon>
