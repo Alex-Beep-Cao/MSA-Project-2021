@@ -18,7 +18,7 @@ const agent = new Agent({
 
 const httpLink = new HttpLink({
   fetch,
-  uri: process.env.REACT_APP_GRAPHQL_URL,
+  uri: "http://localhost:41311/graphql/",
   fetchOptions: {
     agent: agent,
   },
@@ -31,7 +31,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : "failed",
+
+      // authorization: token ? `Bearer ${token}` : "why !!! failed",
     },
   };
 });

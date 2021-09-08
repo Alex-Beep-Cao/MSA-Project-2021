@@ -25,7 +25,8 @@ export const SubmitForm: React.FC<SubmitFormProps> = () => {
   const [hasFocus, setHasFocus] = useState(false);
 
   const isGithubUrl = (value: string) => {
-    const urlRegex = /^(http[s]{0,1}:\/\/){0,1}(github.com\/)([a-zA-Z0-9\-~!@#$%^&*+?:_\/=<>\.]*)?$/i;
+    const urlRegex =
+      /^(http[s]{0,1}:\/\/){0,1}(github.com\/)([a-zA-Z0-9\-~!@#$%^&*+?:_\/=<>\.]*)?$/i;
     return urlRegex.test(value);
   };
 

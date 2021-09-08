@@ -28,8 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public",
-    "generate": "apollo service:download --endpoint=http://localhost:41311/ graphql-schema.json | apollo codegen:generate --localSchemaFile=graphql-schema.json --target=typescript --tagName=gql"
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -68,7 +67,8 @@
     "@storybook/react": "^6.2.9",
     "@types/graphql": "^14.5.0",
     "@types/react-router-dom": "^5.1.8",
-    "apollo": "^2.33.4",
+    "apollo": "^2.1.4",
+    "cross-env": "^7.0.3",
     "prettier": "2.3.2"
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
