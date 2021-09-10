@@ -1,55 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client";
 
 import { BrowserRouter } from "react-router-dom";
 import reportWebVitals from "./reportWebVitals";
-import { InMemoryCache } from "@apollo/client/cache";
 import { ApolloProvider } from "@apollo/client";
-import { HttpLink } from "apollo-link-http";
+
 import { setContext } from "apollo-link-context";
-import { ApolloClient } from "apollo-client";
-import { Agent } from "https";
+import PostSelect from "./PostSelect";
 
-const agent = new Agent({
-  rejectUnauthorized: false,
+const httpLink = createHttpLink({
+  uri: "https://localhost:44361/graphql/",
 });
 
-const httpLink = new HttpLink({
-  fetch,
-  uri: "http://localhost:41311/graphql/",
-  fetchOptions: {
-    agent: agent,
-  },
-});
-
-const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
-  const token = localStorage.getItem("Token"); // return the headers to the context so httpLink can read them
-
+const authLink: any = setContext((_, { headers }) => {
+  const token = localStorage.getItem("token");
   return {
     headers: {
       ...headers,
-
-      // authorization: token ? `Bearer ${token}` : "why !!! failed",
+      //"Access-Control-Allow-Origin": "*",
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
 
 const client: any = new ApolloClient({
-  cache: new InMemoryCache() as any,
   link: authLink.concat(httpLink),
+  cache: new InMemoryCache() as any,
 });
 
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-              
+      {/* <PostSelect /> */}
       <App />
            
     </ApolloProvider>
-    ,
   </BrowserRouter>,
   document.getElementById("root")
 );

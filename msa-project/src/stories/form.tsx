@@ -5,124 +5,106 @@ import {
   Input,
   FormHelperText,
   Button,
+  Container,
+  Typography,
+  Grid,
 } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import { log } from "console";
 import { GitHub } from "@material-ui/icons";
 
-export interface SubmitFormProps {}
+// export interface SubmitFormProps {}
 
-export interface AddPost_addPost {
-  __typename: "Post";
-  id: string;
-  name: string;
-  content: string;
-  modified: any;
-  created: any;
-}
+// export interface AddPost_addPost {
+//   __typename: "Post";
+//   id: string;
+//   name: string;
+//   content: string;
+//   modified: any;
+//   created: any;
+// }
 
-export const POST = gql`
-  fragment postFields on Post {
-    id
-    title
-    content
-    modified
-    created
-  }
-`;
+// export const POST = gql`
+//   fragment postFields on Post {
+//     id
+//     title
+//     content
+//     modified
+//     created
+//   }
+// `;
 
+// const POST = gql`
+//   fragment postFields on Project {
+//     id
+//     title
+//     content
+//     modified
+//     created
+//   }
+// `;
+
+// mutation
 const ADD_POST = gql`
   mutation AddPost($title: String!, $content: String) {
     addPost(input: { title: $title, content: $content }) {
-      ...postFields
+      title
+      content
     }
   }
-  ${POST}
 `;
 
-const Form: React.FC<SubmitFormProps> = () => {
-  const [addPost] = useMutation<AddPost_addPost>(ADD_POST);
-
-  const [name, setName] = useState("");
-  const [url, setUrl] = useState("");
-  const [con, setCont] = useState("");
+function AddTodo() {
+  const [postTitle, setPostTitle] = useState("");
+  const [postContent, setPostContent] = useState("");
   const [submit, setSubmit] = useState(false);
+  const [addPost, { data, loading, error }] = useMutation(ADD_POST);
 
-  const handleInputValue = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setName(e.target.value);
-  };
-
-  const handleUrlValue = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setUrl(e.target.value);
-  };
-
-  const handerText = (e: {
-    target: { value: React.SetStateAction<string> };
-  }) => {
-    setCont(e.target.value);
-  };
-  const nameControl = (
-    <FormControl>
-      <InputLabel htmlFor="my-input"> Post Name</InputLabel>
-      <Input
-        id="post-input"
-        aria-describedby="the post name"
-        onChange={handleInputValue}
-      />
-      <FormHelperText id="the post name">post Name</FormHelperText>
-    </FormControl>
-  );
-
-  const urlControl = (
-    <FormControl>
-      <InputLabel htmlFor="my-input"> Github name</InputLabel>
-      <Input
-        id="githubName-input"
-        aria-describedby="the post name"
-        onChange={handleUrlValue}
-      />
-      <FormHelperText id="the post name">Github Account Name</FormHelperText>
-    </FormControl>
-  );
-
-  const contentContol = (
-    <TextField
-      id="outlined-secondary"
-      label="Outlined secondary"
-      variant="outlined"
-      color="secondary"
-      onChange={handerText}
-    />
-  );
-
-  const handerSubmit = async () => {
-    try {
-      await addPost({
-        variables: {
-          title: name,
-          content: con,
-        },
-      });
-      setSubmit(true);
-    } catch (e) {
-      console.log(e);
-    }
+  const handleSubmit = async () => {
+    await addPost({
+      variables: {
+        title: postTitle,
+        content: postContent,
+      },
+    });
+    setSubmit(true);
   };
 
   return (
-    <div>
-      <div>
-        {nameControl}
-        {urlControl}
-        {contentContol}
-      </div>
-      <Button onClick={handerSubmit}>Submit</Button>
-    </div>
+    <Container className="form_container">
+      <Typography variant="h4">Submit your Post here!</Typography>
+      {submit ? (
+        <Grid>Congratulations! Your Post has been submitted successfully.</Grid>
+      ) : null}
+
+      <Grid container spacing={4}>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="standard-basic"
+            label="Post Name"
+            fullWidth
+            error={postTitle === ""}
+            value={postTitle}
+            helperText="Invalid Post Name"
+            onChange={(e) => setPostTitle(e.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={6}>
+          <TextField
+            id="standard-basic"
+            label="Content"
+            fullWidth
+            error={postContent === ""}
+            value={postContent}
+            helperText="Invalid post Name"
+            onChange={(e) => setPostContent(e.target.value)}
+          />
+        </Grid>
+      </Grid>
+      <button onClick={handleSubmit}> SUBMIT </button>
+    </Container>
   );
-};
-export default Form;
+}
+
+export default AddTodo;
