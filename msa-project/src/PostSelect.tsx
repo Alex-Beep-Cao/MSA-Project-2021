@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
-import Card from "@material-ui/core/Card";
+
 import CardHeader from "@material-ui/core/CardHeader";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,6 +15,8 @@ import {
 import { CardContent, CardMedia, Paper, Typography } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 
+import ContentCard from "./stories/Cards";
+
 const LIST_POSTS = gql`
   query {
     posts {
@@ -22,6 +24,12 @@ const LIST_POSTS = gql`
         id
         title
         content
+        created
+        comments {
+          id
+          content
+        }
+
         user {
           id
           userName
@@ -34,73 +42,57 @@ const LIST_POSTS = gql`
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      width: "500px",
-      marginLeft: "50px",
-    },
-    content: {
-      height: "40px",
-    },
-    media: {
-      height: "35px",
-      paddingTop: "56.25%", // 16:9
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
-    container: {
-      display: "flex",
+      flexGrow: 1,
     },
     paper: {
-      height: 200,
-      flex: 1,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      elevation: 8,
+      padding: theme.spacing(5),
+      textAlign: "center",
+      color: theme.palette.text.secondary,
+    },
+    card: {
+      textAlign: "center",
     },
   })
 );
 
-// create a component that renders a select input for coutries
-function PostSelect() {
+export default function PostSelect() {
   const classes = useStyles();
-
   const [post, setPost] = useState("");
   const { loading, error, data } = useQuery(LIST_POSTS);
-
   if (loading || error) {
     return <p>{error ? error.message : "Loading..."}</p>;
   }
 
   return (
-    <div className={classes.container}>
+    <div className={classes.root}>
       {data.posts.nodes.map((post: any) => (
-        <Card key={post.id} className={classes.root}>
-          <CardHeader
-            avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                {post.user.userName}
-              </Avatar>
-            }
-          />
-          <CardMedia
-            className={classes.media}
-            image="https://source.unsplash.com/1600x900/?nature,water"
-            title="Contemplative Reptile"
-          />
-          <CardContent className={classes.content}>
-            <Typography gutterBottom variant="h5" component="h2">
-              {post.id}
-              {post.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {post.content}
-            </Typography>
-          </CardContent>
-        </Card>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <ContentCard
+                className={classes.card}
+                title={post.title}
+                content={post.content}
+                created={post.created}
+                userName={post.user.userName}
+                comment={post.comments}
+              />
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <ContentCard
+                className={classes.card}
+                title={post.title}
+                content={post.content}
+                created={post.created}
+                userName={post.user.userName}
+                comment={post.comments}
+              />
+            </Paper>
+          </Grid>
+        </Grid>
       ))}
     </div>
   );
 }
-
-export default PostSelect;

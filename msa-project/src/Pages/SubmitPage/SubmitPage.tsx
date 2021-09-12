@@ -5,7 +5,7 @@ import AddTodo from "../../stories/form";
 export const SubmitPage = () => {
   return (
     <div>
-      <Typography variant="h3">Submit Page</Typography>;
+      <Typography variant="h3">Submit Page</Typography>
       <AddTodo />
     </div>
   );
