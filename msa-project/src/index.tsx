@@ -34,8 +34,8 @@ const client: any = new ApolloClient({
 ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
-      {/* <PostSelect /> */}
       <App />
+      <PostSelect />
            
     </ApolloProvider>
   </BrowserRouter>,

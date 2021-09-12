@@ -1,12 +1,12 @@
 import React from "react";
 import { Typography } from "@material-ui/core";
-import { SubmitForm } from "../../stories/SubmitForm";
+import AddTodo from "../../stories/form";
 
 export const SubmitPage = () => {
   return (
     <div>
-      <Typography variant="h3">Home Page</Typography>;
-      <SubmitForm />
+      <Typography variant="h3">Submit Page</Typography>;
+      <AddTodo />
     </div>
   );
 };
