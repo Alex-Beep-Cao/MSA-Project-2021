@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
+import { Grid } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-
+import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
+import { gql, useMutation } from "@apollo/client";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
+import { CardActions, TextField } from "@material-ui/core";
+
+const ADD_COMMENT = gql`
+  mutation AddComment($postId: String!, $content: String) {
+    addComment(input: { content: $content, postId: $postId }) {
+      content
+      postId
+    }
+  }
+`;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -40,13 +46,41 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
 export default function ContentCard(props: any) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const [postId, setPostId] = useState("");
+  const [commentContent, setCommentContent] = useState("");
+  const [submit, setSubmit] = useState(false);
+  const [like, setLike] = useState(true);
+  const [addComment, { data, loading, error }] = useMutation(ADD_COMMENT);
+  const [color, setColor] = useState<
+    | "inherit"
+    | "disabled"
+    | "error"
+    | "action"
+    | "secondary"
+    | "primary"
+    | undefined
+  >("secondary");
+
+  const handleSubmit = async () => {
+    await addComment({
+      variables: {
+        content: commentContent,
+        postId: postId,
+      },
+    });
+    setSubmit(true);
   };
+
+  const likehandle = () => {
+    setLike((prelike) => !prelike);
+    console.log(like);
+    setColor((prelike) => (prelike ? "primary" : "secondary"));
+  };
+  console.log(like);
 
   return (
     <Card className={classes.root}>
@@ -68,8 +102,34 @@ export default function ContentCard(props: any) {
         <Typography variant="body2" color="textSecondary" component="p">
           {props.content}
           {props.comment &&
-            props.comment.map((co: any) => <div>{co.content}</div>)}
+            props.comment.map((co: { content: string }) => (
+              <div>{co.content}</div>
+            ))}
+
+          <FavoriteIcon onClick={likehandle} color={color} />
         </Typography>
+
+        {submit ? (
+          <Grid>
+            Congratulations! Your Post has been submitted successfully.
+          </Grid>
+        ) : null}
+
+        <TextField
+          id="outlined-multiline-static"
+          label="Comments"
+          multiline
+          rows={4}
+          variant="outlined"
+          onChange={(e) => {
+            setCommentContent(e.target.value);
+            // setPostId(props.id);
+          }}
+        />
+
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          I want Comment
+        </Button>
       </CardContent>
     </Card>
   );

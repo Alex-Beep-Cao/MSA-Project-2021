@@ -1,20 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
 import { useState } from "react";
-
-import CardHeader from "@material-ui/core/CardHeader";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { red } from "@material-ui/core/colors";
-import {
-  makeStyles,
-  Theme,
-  createStyles,
-  withStyles,
-} from "@material-ui/core/styles";
-import { CardContent, CardMedia, Paper, Typography } from "@material-ui/core";
+import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
+import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-
 import ContentCard from "./stories/Cards";
 
 const LIST_POSTS = gql`
@@ -71,6 +59,7 @@ export default function PostSelect() {
             <Paper className={classes.paper}>
               <ContentCard
                 className={classes.card}
+                id={post.id}
                 title={post.title}
                 content={post.content}
                 created={post.created}
@@ -83,6 +72,7 @@ export default function PostSelect() {
             <Paper className={classes.paper}>
               <ContentCard
                 className={classes.card}
+                key={post.id}
                 title={post.title}
                 content={post.content}
                 created={post.created}

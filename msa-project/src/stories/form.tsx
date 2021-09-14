@@ -1,49 +1,7 @@
-import React, { useState } from "react";
-import {
-  FormControl,
-  InputLabel,
-  Input,
-  FormHelperText,
-  Button,
-  Container,
-  Typography,
-  Grid,
-} from "@material-ui/core";
+import { useState } from "react";
+import { Container, Typography, Grid } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { log } from "console";
-import { GitHub } from "@material-ui/icons";
-
-// export interface SubmitFormProps {}
-
-// export interface AddPost_addPost {
-//   __typename: "Post";
-//   id: string;
-//   name: string;
-//   content: string;
-//   modified: any;
-//   created: any;
-// }
-
-// export const POST = gql`
-//   fragment postFields on Post {
-//     id
-//     title
-//     content
-//     modified
-//     created
-//   }
-// `;
-
-// const POST = gql`
-//   fragment postFields on Project {
-//     id
-//     title
-//     content
-//     modified
-//     created
-//   }
-// `;
+import { gql, useMutation } from "@apollo/client";
 
 // mutation
 const ADD_POST = gql`
@@ -81,9 +39,11 @@ function AddTodo() {
       <Grid container spacing={4}>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="standard-basic"
+            required
+            id="outlined-required"
             label="Post Name"
             fullWidth
+            variant="outlined"
             error={postTitle === ""}
             value={postTitle}
             helperText="Invalid Post Name"
@@ -92,9 +52,11 @@ function AddTodo() {
         </Grid>
         <Grid item xs={12} sm={6}>
           <TextField
-            id="standard-basic"
+            required
+            id="outlined-required"
             label="Content"
             fullWidth
+            variant="outlined"
             error={postContent === ""}
             value={postContent}
             helperText="Invalid post Name"
