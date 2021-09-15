@@ -48,13 +48,13 @@ export default function PostSelect() {
   const [post, setPost] = useState("");
   const { loading, error, data } = useQuery(LIST_POSTS);
   if (loading || error) {
-    return <p>{error ? error.message : "Loading..."}</p>;
+    return  <div>{error ? error.message : "Loading..."}</div>;
   }
 
   return (
     <div className={classes.root}>
       {data.posts.nodes.map((post: any) => (
-        <Grid container spacing={3}>
+        <Grid container spacing={3} key={post.id}>
           <Grid item xs={6}>
             <Paper className={classes.paper}>
               <ContentCard

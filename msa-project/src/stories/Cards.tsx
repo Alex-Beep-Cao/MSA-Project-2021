@@ -76,11 +76,22 @@ export default function ContentCard(props: any) {
   };
 
   const likehandle = () => {
-    setLike((prelike) => !prelike);
-    console.log(like);
-    setColor((prelike) => (prelike ? "primary" : "secondary"));
+    setLike((prelike) => {
+      setColor(() => (prelike ? "primary" : "secondary"));
+      return !like;
+    });
   };
-  console.log(like);
+  // const colorhandle = () => {
+  //   setColor( (precolor) => {
+  //     if(precolor === "primary"){
+  //        return 'secondary';
+  //     }
+  //     else{
+  //       return 'primary';
+  //     }
+
+  //   })
+  // }
 
   return (
     <Card className={classes.root}>
@@ -103,7 +114,7 @@ export default function ContentCard(props: any) {
           {props.content}
           {props.comment &&
             props.comment.map((co: { content: string }) => (
-              <div>{co.content}</div>
+              <div key={co.content}>{co.content}</div>
             ))}
 
           <FavoriteIcon onClick={likehandle} color={color} />
@@ -123,7 +134,7 @@ export default function ContentCard(props: any) {
           variant="outlined"
           onChange={(e) => {
             setCommentContent(e.target.value);
-            // setPostId(props.id);
+            setPostId(props.id);
           }}
         />
 
