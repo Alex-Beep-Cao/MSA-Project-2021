@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
@@ -11,7 +11,7 @@ import { gql, useMutation } from "@apollo/client";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import { CardActions, TextField } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 
 const ADD_COMMENT = gql`
   mutation AddComment($postId: String!, $content: String) {
@@ -54,7 +54,8 @@ export default function ContentCard(props: any) {
   const [commentContent, setCommentContent] = useState("");
   const [submit, setSubmit] = useState(false);
   const [like, setLike] = useState(true);
-  const [addComment, { data, loading, error }] = useMutation(ADD_COMMENT);
+  const [addComment] = useMutation(ADD_COMMENT);
+
   const [color, setColor] = useState<
     | "inherit"
     | "disabled"

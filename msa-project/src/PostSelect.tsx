@@ -1,5 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
-import { useState } from "react";
+
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
@@ -45,10 +45,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export default function PostSelect() {
   const classes = useStyles();
-  const [post, setPost] = useState("");
+  //const [post, setPost] = useState("");
   const { loading, error, data } = useQuery(LIST_POSTS);
   if (loading || error) {
-    return  <div>{error ? error.message : "Loading..."}</div>;
+    return <div>{error ? error.message : "Loading..."}</div>;
   }
 
   return (

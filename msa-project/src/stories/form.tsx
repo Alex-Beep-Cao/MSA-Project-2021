@@ -19,6 +19,10 @@ function AddTodo() {
   const [submit, setSubmit] = useState(false);
   const [addPost, { data, loading, error }] = useMutation(ADD_POST);
 
+  // if (loading || error) {
+  //   return <div>{error ? error.message : "Loading..."}</div>;
+  // }
+
   const handleSubmit = async () => {
     await addPost({
       variables: {
