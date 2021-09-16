@@ -3,11 +3,11 @@ import { gql, useQuery } from "@apollo/client";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
 import { Paper } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
-import ContentCard from "./stories/Cards";
+import ContentCard from "./Cards";
 
 const LIST_POSTS = gql`
   query {
-    posts {
+    posts(first: 50) {
       nodes {
         id
         title

@@ -8,10 +8,10 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloProvider } from "@apollo/client";
 
 import { setContext } from "apollo-link-context";
-import PostSelect from "./PostSelect";
 
 const httpLink = createHttpLink({
-  uri: "https://localhost:44361/graphql/",
+  // uri: "https://localhost:44361/graphql/",
+  uri: "https://msa-project-alex.azurewebsites.net/graphql/",
 });
 
 const authLink: any = setContext((_, { headers }) => {
@@ -34,7 +34,6 @@ ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <App />
-      <PostSelect />
            
     </ApolloProvider>
   </BrowserRouter>,

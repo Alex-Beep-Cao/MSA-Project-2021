@@ -14,7 +14,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import { TextField } from "@material-ui/core";
 
 const ADD_COMMENT = gql`
-  mutation AddComment($postId: String!, $content: String) {
+  mutation AddComment($content: String, $postId: String) {
     addComment(input: { content: $content, postId: $postId }) {
       content
       postId
@@ -66,6 +66,9 @@ export default function ContentCard(props: any) {
     | undefined
   >("secondary");
 
+  // console.log(postId);
+  // console.log(commentContent);
+
   const handleSubmit = async () => {
     await addComment({
       variables: {
@@ -82,18 +85,6 @@ export default function ContentCard(props: any) {
       return !like;
     });
   };
-  // const colorhandle = () => {
-  //   setColor( (precolor) => {
-  //     if(precolor === "primary"){
-  //        return 'secondary';
-  //     }
-  //     else{
-  //       return 'primary';
-  //     }
-
-  //   })
-  // }
-
   return (
     <Card className={classes.root}>
       <CardHeader
