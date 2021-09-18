@@ -45,7 +45,7 @@ export const HomePage = () => {
     }
 
     getToken();
-  }, []);
+  });
 
   return (
     <Paper>
