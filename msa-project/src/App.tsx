@@ -21,11 +21,6 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Paper style={{ height: "100vh" }} className="App">
-        {/* <Checkbox
-          label="Turn off the Light"
-          checked={darkMode}
-          onChange={() => setDarkmode(!darkMode)}
-        /> */}
         <FormControlLabel
           control={
             <Checkbox

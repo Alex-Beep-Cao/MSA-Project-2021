@@ -10,12 +10,13 @@ import { ApolloProvider } from "@apollo/client";
 import { setContext } from "apollo-link-context";
 
 const httpLink = createHttpLink({
-  // uri: "https://localhost:44361/graphql/",
+  //uri: "https://localhost:44361/graphql/",
   uri: "https://msa-project-alex.azurewebsites.net/graphql/",
 });
 
 const authLink: any = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
+
   return {
     headers: {
       ...headers,
@@ -34,7 +35,7 @@ ReactDOM.render(
   <BrowserRouter>
     <ApolloProvider client={client}>
       <App />
-           
+        
     </ApolloProvider>
   </BrowserRouter>,
   document.getElementById("root")

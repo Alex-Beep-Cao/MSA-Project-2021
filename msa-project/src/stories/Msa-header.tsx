@@ -7,11 +7,11 @@ import MenuIcon from "@material-ui/icons/Menu";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
+
 import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Drawer } from "@material-ui/core";
-import { Sidebar } from "./Sidebar";
+import Sidebar from "./Sidebar";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -34,6 +34,11 @@ export default function Header() {
     setSideBar(!sideBar);
   };
 
+  const githubCode = window.location.search
+    .substring(1)
+    .split("&")[0]
+    .split("code=")[1];
+
   return (
     <div className="MsaHeader">
       <AppBar position="static">
@@ -47,13 +52,13 @@ export default function Header() {
           >
             <MenuIcon />
             <Drawer anchor="left" open={sideBar} onClose={toggleSideBar}>
+              {githubCode ? localStorage.setItem("code", githubCode) : ""}
               <Sidebar />
             </Drawer>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
             It's Nothing But UGLY.
           </Typography>
-          <Button color="inherit">Login</Button>
         </Toolbar>
       </AppBar>
     </div>

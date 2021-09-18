@@ -48,6 +48,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function ContentCard(props: any) {
+  // const { comment } = props;
   const classes = useStyles();
 
   const [postId, setPostId] = useState("");
@@ -69,14 +70,25 @@ export default function ContentCard(props: any) {
   // console.log(postId);
   // console.log(commentContent);
 
+  // useEffect(() => {
+  //   if (!comment.length) {
+  //     return;
+  //   }
+  //   const [{ content }] = (comment as any) || "";
+  //   console.log(content);
+  //   setCommentContent(content);
+  // }, []);
+
   const handleSubmit = async () => {
+    // setCommentContent(e.getElementById("outlined-multiline-static")[0].value);
     await addComment({
       variables: {
         content: commentContent,
         postId: postId,
       },
+    }).then((r) => {
+      setSubmit(true);
     });
-    setSubmit(true);
   };
 
   const likehandle = () => {
@@ -85,6 +97,7 @@ export default function ContentCard(props: any) {
       return !like;
     });
   };
+
   return (
     <Card className={classes.root}>
       <CardHeader
@@ -108,7 +121,7 @@ export default function ContentCard(props: any) {
             props.comment.map((co: { content: string }) => (
               <div key={co.content}>{co.content}</div>
             ))}
-
+          {/* {commentContent} */}
           <FavoriteIcon onClick={likehandle} color={color} />
         </Typography>
 
@@ -125,7 +138,7 @@ export default function ContentCard(props: any) {
           rows={4}
           variant="outlined"
           onChange={(e) => {
-            setCommentContent(e.target.value);
+           setCommentContent(e.target.value);
             setPostId(props.id);
           }}
         />
