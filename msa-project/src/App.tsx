@@ -6,6 +6,7 @@ import Header from "./stories/Msa-header";
 import { Route, Switch } from "react-router-dom";
 import { HomePage } from "./Pages/HomePage/Homepage";
 import { SubmitPage } from "./Pages/SubmitPage/SubmitPage";
+import { ByePage } from "./Pages/ByePage/ByePage";
 import { FormControlLabel, Paper } from "@material-ui/core";
 import { createTheme, ThemeProvider } from "@material-ui/core/styles";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -34,6 +35,8 @@ function App() {
         <Switch>
           <Route path="/home" component={HomePage} />
           <Route path="/submit" component={SubmitPage} />
+          {/* <Route path="/welcome" component={WelcomePage} /> */}
+          <Route path="/bye" component={ByePage} />
         </Switch>
       </Paper>
     </ThemeProvider>

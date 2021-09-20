@@ -8,7 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 import { gql, useMutation } from "@apollo/client";
-import Typography from "@material-ui/core/Typography";
+
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import { TextField } from "@material-ui/core";
@@ -115,7 +115,7 @@ export default function ContentCard(props: any) {
         title="Paella dish"
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <div>
           {props.content}
           {props.comment &&
             props.comment.map((co: { content: string }) => (
@@ -123,7 +123,7 @@ export default function ContentCard(props: any) {
             ))}
           {/* {commentContent} */}
           <FavoriteIcon onClick={likehandle} color={color} />
-        </Typography>
+        </div>
 
         {submit ? (
           <Grid>
@@ -138,7 +138,7 @@ export default function ContentCard(props: any) {
           rows={4}
           variant="outlined"
           onChange={(e) => {
-           setCommentContent(e.target.value);
+            setCommentContent(e.target.value);
             setPostId(props.id);
           }}
         />

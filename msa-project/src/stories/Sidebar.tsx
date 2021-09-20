@@ -12,12 +12,13 @@ import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useEffect } from "react";
 
 // import { gql, useMutation } from "@apollo/client";
 // import { useState } from "react";
 
 const CLIENT_ID = "db91b85f047825b818b2";
-const REDIRECT_URI = "http://localhost:3000/home";
+const REDIRECT_URI = "https://msa2021f.azurewebsites.net/home";
 
 const useStyles = makeStyles({
   list: {
@@ -36,6 +37,11 @@ function Sidebar() {
     localStorage.removeItem("code");
     localStorage.removeItem("token");
   };
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      handleLogout();
+    }
+  }, []);
 
   return (
     <div className={classes.list}>
@@ -72,12 +78,20 @@ function Sidebar() {
       )}
 
       <Divider />
+
       <List>
-        <ListItem button href="/home" component={Link} onClick={handleLogout}>
+        <ListItem>
           <ListItemIcon>
             <ExitToAppIcon />
           </ListItemIcon>
-          <ListItemText className={classes.listText} primary="Logout" />
+          <Button
+            color="inherit"
+            className={classes.listText}
+            onClick={handleLogout}
+            href="/bye"
+          >
+            Logout
+          </Button>
         </ListItem>
 
         <ListItem>
@@ -86,6 +100,7 @@ function Sidebar() {
           </ListItemIcon>
           <Button
             color="inherit"
+            className={classes.listText}
             href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
           >
             Login
