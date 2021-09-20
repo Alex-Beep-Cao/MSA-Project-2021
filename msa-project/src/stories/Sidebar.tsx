@@ -32,63 +32,45 @@ const useStyles = makeStyles({
 });
 function Sidebar() {
   const classes = useStyles();
-  // const [submit, setSubmit] = useState(false);
-  // const [login] = useMutation(LOGIN);
-
-  // if (loading) return "Submitting...";
-  // if (error) return `Submission error! ${error.message}`;
-
-  // const handleSubmit = (e: any) => {
-  // e.preventDefault();
-  // const code = localStorage.getItem("code");
-  // console.log("handelsubmit", code);
-  // login({
-  //   variables: {
-  //     code: code,
-  //   },
-  // })
-  //   .then((r) => {
-  //     console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-  //     if (r.errors) {
-  //       console.log(r.errors.join("/n"));
-  //       return;
-  //     }
-  //     if (r) {
-  //       console.log(r);
-  //       localStorage.setItem("token", r.data.login.jwt);
-  //     }
-  //   })
-  //   .catch((reason) => console.log("bbbbbbbbbbbbbbbbbbbbbbbb", reason));
-  // login({
-  //   variables: {
-  //     code: githubCode,
-  //   },
-  // });
-  // setSubmit(true);
-  // localStorage.setItem("token", data);
-  // };
-
   const handleLogout = () => {
+    localStorage.removeItem("code");
     localStorage.removeItem("token");
   };
 
   return (
     <div className={classes.list}>
-      {/* {githubCode} */}
-      <List>
-        <ListItem button href="/home" component={Link}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.listText} primary="Home" />
-        </ListItem>
-        <ListItem button href="/submit" component={Link}>
-          <ListItemIcon>
-            <ArrowUpwardIcon />
-          </ListItemIcon>
-          <ListItemText className={classes.listText} primary="Submit" />
-        </ListItem>
-      </List>
+      {localStorage.getItem("token") ? (
+        <List>
+          <ListItem button href="/home" component={Link}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.listText} primary="Home" />
+          </ListItem>
+          <ListItem button href="/submit" component={Link}>
+            <ListItemIcon>
+              <ArrowUpwardIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.listText} primary="Submit" />
+          </ListItem>
+        </List>
+      ) : (
+        <List>
+          <ListItem disabled button href="/home" component={Link}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.listText} primary="Home" />
+          </ListItem>
+          <ListItem disabled button href="/submit" component={Link}>
+            <ListItemIcon>
+              <ArrowUpwardIcon />
+            </ListItemIcon>
+            <ListItemText className={classes.listText} primary="Submit" />
+          </ListItem>
+        </List>
+      )}
+
       <Divider />
       <List>
         <ListItem button href="/home" component={Link} onClick={handleLogout}>
