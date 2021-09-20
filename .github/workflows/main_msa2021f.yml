@@ -13,7 +13,8 @@ jobs:
   build:
     runs-on: windows-latest
     defaults:
-      working-directory: "./msa-project"
+      run:
+        working-directory: "./msa-project"
 
     steps:
       - uses: actions/checkout@v2
