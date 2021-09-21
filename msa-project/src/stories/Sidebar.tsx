@@ -19,6 +19,7 @@ import { useEffect } from "react";
 
 const CLIENT_ID = "db91b85f047825b818b2";
 const REDIRECT_URI = "https://msa2021f.azurewebsites.net/home";
+//const REDIRECT_URI = "http://localhost:3000/home";
 
 const useStyles = makeStyles({
   list: {
@@ -103,7 +104,7 @@ function Sidebar() {
             className={classes.listText}
             href={`https://github.com/login/oauth/authorize?client_id=${CLIENT_ID}&scope=user&redirect_uri=${REDIRECT_URI}`}
           >
-            Login
+            Login in With Github
           </Button>
         </ListItem>
       </List>

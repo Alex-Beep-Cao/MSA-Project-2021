@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import { Paper, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 
 import PostSelect from "../../stories/PostSelect";
 import { useEffect } from "react";
@@ -48,10 +48,15 @@ export const HomePage = () => {
   });
 
   return (
-    <Paper>
+    <Box>
       <Typography variant="h3">Home Page</Typography>
-      <Typography variant="h2">Why you are here?</Typography>
-      <PostSelect />
-    </Paper>
+      <Typography variant="h2">Welcome to see our lovely dogs ~</Typography>
+      <p>
+        🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶🐶
+      </p>
+      <Box sx={{ m: 10 }}>
+        <PostSelect />
+      </Box>
+    </Box>
   );
 };

@@ -127,7 +127,7 @@ export default function ContentCard(props: any) {
 
         {submit ? (
           <Grid>
-            Congratulations! Your Post has been submitted successfully.
+            Congratulations! Your Comment has been submitted successfully.
           </Grid>
         ) : null}
 

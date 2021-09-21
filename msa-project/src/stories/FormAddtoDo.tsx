@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Container, Typography, Grid, Button } from "@material-ui/core";
+import { Container, Typography, Grid, Button, Box } from "@material-ui/core";
 import TextField from "@material-ui/core/TextField";
 import { gql, useMutation } from "@apollo/client";
 
@@ -18,10 +18,6 @@ function AddTodo() {
   const [postContent, setPostContent] = useState("");
   const [submit, setSubmit] = useState(false);
   const [addPost] = useMutation(ADD_POST);
-  // , { data, loading, error }
-  // if (loading || error) {
-  //   return <div>{error ? error.message : "Loading..."}</div>;
-  // }
 
   const handleSubmit = async () => {
     await addPost({
@@ -35,7 +31,12 @@ function AddTodo() {
 
   return (
     <Container className="form_container">
-      <Typography variant="h4">Submit your Post here!</Typography>
+      <Box sx={{ m: 6 }}>
+        <Typography variant="h4">
+          Submit your Post about your DOG here!
+        </Typography>
+      </Box>
+
       {submit ? (
         <Grid>Congratulations! Your Post has been submitted successfully.</Grid>
       ) : null}
@@ -68,9 +69,11 @@ function AddTodo() {
           />
         </Grid>
       </Grid>
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
-        I want Post
-      </Button>
+      <Box sx={{ m: 4 }}>
+        <Button variant="contained" color="secondary" onClick={handleSubmit}>
+          I want Post
+        </Button>
+      </Box>
     </Container>
   );
 }

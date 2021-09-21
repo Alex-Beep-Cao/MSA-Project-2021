@@ -1,19 +1,23 @@
-import { Paper, Typography } from "@material-ui/core";
+import { Box, Typography } from "@material-ui/core";
 
 export const ByePage = () => {
   return (
-    <Paper>
-      <Typography variant="h3">Bye Page</Typography>
-
-      <Typography variant="h2">
-        Wish you give me high marks and good day !
-      </Typography>
-      <img
-        src="https://source.unsplash.com/1600x900/?dogs"
-        alt="Bye"
-        width="800"
-        height="600"
-      ></img>
-    </Paper>
+    <Box>
+      <Box>
+        <Typography variant="h2">See Ya ~ </Typography>
+        <p>
+          &#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&#128021;&
+        </p>
+      </Box>
+      <Box sx={{ m: 4 }}>
+        <Typography variant="h3">Remember to pat your dog.</Typography>
+        <img
+          src="https://source.unsplash.com/1600x900/?dogs"
+          alt="Bye"
+          width="800"
+          height="600"
+        ></img>
+      </Box>
+    </Box>
   );
 };
