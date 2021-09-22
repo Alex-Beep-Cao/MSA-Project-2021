@@ -2,7 +2,7 @@ import { gql, useMutation } from "@apollo/client";
 import { Box, Typography } from "@material-ui/core";
 
 import PostSelect from "../../stories/PostSelect";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 
 const LOGIN = gql`
   mutation ($code: String!) {
@@ -16,13 +16,16 @@ const LOGIN = gql`
 // const REDIRECT_URI = "http://localhost:3000/home";
 
 export const HomePage = () => {
+  const githubCode = window.location.search
+    .substring(1)
+    .split("&")[0]
+    .split("code=")[1];
   const [login] = useMutation(LOGIN);
-  const code = localStorage.getItem("code");
 
-  function getToken() {
+  const getToken = useCallback(() => {
     login({
       variables: {
-        code: code,
+        code: githubCode,
       },
     })
       .then((r) => {
@@ -37,7 +40,7 @@ export const HomePage = () => {
         }
       })
       .catch((reason) => console.log("bbbbbbbbbbbbbbbbbbbbbbbb", reason));
-  }
+  }, [githubCode, login]);
 
   useEffect(() => {
     if (localStorage.getItem("token")) {
@@ -45,7 +48,7 @@ export const HomePage = () => {
     }
 
     getToken();
-  });
+  }, [getToken]);
 
   return (
     <Box>

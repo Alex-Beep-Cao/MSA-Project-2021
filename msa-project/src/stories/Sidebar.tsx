@@ -12,14 +12,14 @@ import HomeIcon from "@material-ui/icons/Home";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useEffect } from "react";
+// import { useEffect, useState } from "react";
 
 // import { gql, useMutation } from "@apollo/client";
 // import { useState } from "react";
 
 const CLIENT_ID = "db91b85f047825b818b2";
-const REDIRECT_URI = "https://msa2021f.azurewebsites.net/home";
-//const REDIRECT_URI = "http://localhost:3000/home";
+//const REDIRECT_URI = "https://msa2021f.azurewebsites.net/home";
+const REDIRECT_URI = "http://localhost:3000/home";
 
 const useStyles = makeStyles({
   list: {
@@ -34,15 +34,16 @@ const useStyles = makeStyles({
 });
 function Sidebar() {
   const classes = useStyles();
+
   const handleLogout = () => {
-    localStorage.removeItem("code");
     localStorage.removeItem("token");
   };
-  useEffect(() => {
-    if (localStorage.getItem("token")) {
-      handleLogout();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (localStorage.getItem("token") === "") {
+  //     setStatus(!status);
+  //     handleLogout();
+  //   }
+  // }, [status]);
 
   return (
     <div className={classes.list}>

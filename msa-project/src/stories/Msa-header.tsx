@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Drawer } from "@material-ui/core";
 import Sidebar from "./Sidebar";
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -34,10 +35,10 @@ export default function Header() {
     setSideBar(!sideBar);
   };
 
-  const githubCode = window.location.search
-    .substring(1)
-    .split("&")[0]
-    .split("code=")[1];
+  // const githubCode = window.location.search
+  //   .substring(1)
+  //   .split("&")[0]
+  //   .split("code=")[1];
 
   return (
     <div className="MsaHeader">
@@ -52,7 +53,8 @@ export default function Header() {
           >
             <MenuIcon />
             <Drawer anchor="left" open={sideBar} onClose={toggleSideBar}>
-              {githubCode ? localStorage.setItem("code", githubCode) : ""}
+              {/* {githubCode ? localStorage.setItem("code", githubCode) : ""} */}
+              {/* && !localStorage.getItem("code") */}
               <Sidebar />
             </Drawer>
           </IconButton>
