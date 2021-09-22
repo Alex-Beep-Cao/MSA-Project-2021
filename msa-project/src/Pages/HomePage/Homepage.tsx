@@ -12,9 +12,6 @@ const LOGIN = gql`
   }
 `;
 
-// const CLIENT_ID = "db91b85f047825b818b2";
-// const REDIRECT_URI = "http://localhost:3000/home";
-
 export const HomePage = () => {
   const githubCode = window.location.search
     .substring(1)

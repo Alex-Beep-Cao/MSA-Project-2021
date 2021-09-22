@@ -35,11 +35,6 @@ export default function Header() {
     setSideBar(!sideBar);
   };
 
-  // const githubCode = window.location.search
-  //   .substring(1)
-  //   .split("&")[0]
-  //   .split("code=")[1];
-
   return (
     <div className="MsaHeader">
       <AppBar position="static">
@@ -53,8 +48,6 @@ export default function Header() {
           >
             <MenuIcon />
             <Drawer anchor="left" open={sideBar} onClose={toggleSideBar}>
-              {/* {githubCode ? localStorage.setItem("code", githubCode) : ""} */}
-              {/* && !localStorage.getItem("code") */}
               <Sidebar />
             </Drawer>
           </IconButton>
