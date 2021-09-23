@@ -43,3 +43,9 @@
   justify-content: space-around;
   align-items: center;
 }
+.css-g199ms-MuiImageList-root {
+  position: relative;
+  margin: auto;
+  display: flex;
+  justify-self: center;
+}

@@ -67,20 +67,7 @@ export default function ContentCard(props: any) {
     | undefined
   >("secondary");
 
-  // console.log(postId);
-  // console.log(commentContent);
-
-  // useEffect(() => {
-  //   if (!comment.length) {
-  //     return;
-  //   }
-  //   const [{ content }] = (comment as any) || "";
-  //   console.log(content);
-  //   setCommentContent(content);
-  // }, []);
-
   const handleSubmit = async () => {
-    // setCommentContent(e.getElementById("outlined-multiline-static")[0].value);
     await addComment({
       variables: {
         content: commentContent,
@@ -111,7 +98,7 @@ export default function ContentCard(props: any) {
       />
       <CardMedia
         className={classes.media}
-        image="https://source.unsplash.com/1600x900/?nature,water"
+        image="https://source.unsplash.com/1600x900/?dogs"
         title="Paella dish"
       />
       <CardContent>
@@ -121,7 +108,7 @@ export default function ContentCard(props: any) {
             props.comment.map((co: { content: string }) => (
               <div key={co.content}>{co.content}</div>
             ))}
-          {/* {commentContent} */}
+
           <FavoriteIcon onClick={likehandle} color={color} />
         </div>
 

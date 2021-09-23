@@ -52,7 +52,7 @@ export default function Header() {
             </Drawer>
           </IconButton>
           <Typography variant="h6" className={classes.title}>
-            It's Nothing But UGLY.
+            YOUR MEMORY WITH YOUR DOG .
           </Typography>
         </Toolbar>
       </AppBar>
